@@ -5,9 +5,6 @@ fclose(inFid);
 
 A = A + 1;
 
-%test
-%more stuff
-
 map = [
        0 0 0; %black, inaccessible
        1 0 0; %red, current robot location
