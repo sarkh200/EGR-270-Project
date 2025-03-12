@@ -6,6 +6,7 @@ fclose(inFid);
 A = A + 1;
 
 %test
+%more stuff
 
 map = [
        0 0 0; %black, inaccessible
