@@ -7,6 +7,7 @@ A = A + 1;
 
 %test
 %more stuff
+%comment test
 
 map = [
        0 0 0; %black, inaccessible
