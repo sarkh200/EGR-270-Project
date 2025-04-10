@@ -1,4 +1,6 @@
-floorMap = getFloorPlans(1);
+[model, plan] = main_menu();
+
+floorMap = getFloorPlans(plan);
 
 drawFloorPlan(floorMap);
 
