@@ -5,7 +5,7 @@ fclose(inFid);
 
 drawFloorPlan(A);
 
-userInput = ''; %
+userInput = '';
 
 robotLocation = [2, 2]; %the starting location of our roomba
 
@@ -23,7 +23,7 @@ while strcmp(userInput, 'end') == false
         case 'a'
             newRobotLocation(2) = robotLocation(2) - 1;
         case 'd'
-            newRobotLocation(2) = robotLocation(2) + 1;
+            newRobotLocation(2) = robotLocation(2) + 1; 
     end
 
     if (newRobotLocation(1) > 0 && newRobotLocation(1) < 31 && newRobotLocation(2) > 0 && newRobotLocation(2) < 26)
