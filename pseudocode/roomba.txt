@@ -1,0 +1,7 @@
+[plan model] = showMainMenu();
+
+map = getMap(plan);
+
+[ratio area time rechargeAmount] = runRobot(plan, map, model);
+
+showCleaningSummary(ratio, area, time, rechargeAmount)

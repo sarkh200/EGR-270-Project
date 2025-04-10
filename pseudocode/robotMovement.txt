@@ -1,0 +1,14 @@
+map = getMapFromFile(file); //map that is displayed (affected)
+movementMap(25 30) = 0;
+
+movement(){
+    Movement loop: (proven false by stepping on black dot ( 0 in matrix ))
+        Turn down (if false) 
+        turn right (if false)
+        turn up (if false)
+        turn left (if false)
+        
+        recordSteps()//gray blocks
+}
+
+returning()

@@ -1,0 +1,10 @@
+========menu=========
+
+if Floor Plan 1
+return floor_plan_1.floor
+else if Floor Plan 2
+return floor_plan_2.floor
+else if Floor Plan 3
+return floor_plan_3.floor
+else 
+return floor_plan_4.floor

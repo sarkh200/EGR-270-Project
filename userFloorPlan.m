@@ -5,9 +5,9 @@ fclose(inFid);
 
 drawFloorPlan(A);
 
-userInput = '';
+userInput = ''; %
 
-robotLocation = [2, 2];
+robotLocation = [2, 2]; %the starting location of our roomba
 
 colorUnderRobot = 2;
 
@@ -29,9 +29,11 @@ while strcmp(userInput, 'end') == false
     if (newRobotLocation(1) > 0 && newRobotLocation(1) < 31 && newRobotLocation(2) > 0 && newRobotLocation(2) < 26)
         A(robotLocation(1), robotLocation(2)) = colorUnderRobot;
         colorUnderRobot = A(newRobotLocation(1), newRobotLocation(2));
+        %colorUnderRobot = 5;
         A(newRobotLocation(1), newRobotLocation(2)) = 1;
         robotLocation = newRobotLocation;
     end
 
+    clc();
     drawFloorPlan(A);
 end
