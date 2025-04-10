@@ -5,6 +5,9 @@ fclose(inFid);
 
 drawFloorPlan(A);
 
+%noah has no hairline
+
+
 userInput = '';
 
 robotLocation = [2, 2];
@@ -23,7 +26,7 @@ while strcmp(userInput, 'end') == false
         case 'a'
             newRobotLocation(2) = robotLocation(2) - 1;
         case 'd'
-            newRobotLocation(2) = robotLocation(2) + 1;
+            newRobotLocation(2) = robotLocation(2) + 1; 
     end
 
     if (newRobotLocation(1) > 0 && newRobotLocation(1) < 31 && newRobotLocation(2) > 0 && newRobotLocation(2) < 26)
