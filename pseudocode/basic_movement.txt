@@ -1,0 +1,10 @@
+function basic_movement(map, chargeAmount){
+    while (allFloorsNotClean){
+        if(checkUp()){
+            move(up);
+        }
+        else if(checkRight()){
+            
+        }
+    }
+}
