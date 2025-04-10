@@ -5,8 +5,7 @@ fclose(inFid);
 
 drawFloorPlan(A);
 
-%noah has no hairline
-
+%noah has no hair
 
 userInput = '';
 
