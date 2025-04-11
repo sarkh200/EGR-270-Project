@@ -1,8 +1,10 @@
 [model, plan] = main_menu();
-
 floorMap = getFloorPlans(plan);
 
 drawFloorPlan(floorMap);
+
+[y, Fs] = audioread('epic_music.mp3');
+sound(y, Fs, 16);
 
 userInput = '';
 
