@@ -1,0 +1,4 @@
+gCost = distanceFromStatrtingNode();
+hCost = distanceFromEndNode();
+fCost = gCost + hCost;
+

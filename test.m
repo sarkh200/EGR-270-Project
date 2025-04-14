@@ -3,7 +3,7 @@ floorMap = getFloorPlans(plan);
 
 drawFloorPlan(floorMap);
 
-[y, Fs] = audioread('epic_music.mp3');
+[y, Fs] = audioread('music/epic_music.mp3');
 sound(y, Fs, 16);
 
 userInput = '';
@@ -13,6 +13,7 @@ robotLocation = [2, 2]; %the starting location of our roomba
 colorUnderRobot = floorMap(robotLocation(1), robotLocation(2)); %color under initial location (bound to change after loop)
 
 while strcmp(userInput, 'end') == false %Pseudocode practice: direct input of movement (WASD)
+    drawFloorPlan(floorMap);
     userInput = input('>', 's');
     newRobotLocation = robotLocation;
 
@@ -38,5 +39,6 @@ while strcmp(userInput, 'end') == false %Pseudocode practice: direct input of mo
     end
 
     clc();
-    drawFloorPlan(floorMap);
 end
+
+clear sound;
