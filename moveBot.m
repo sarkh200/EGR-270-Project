@@ -1,6 +1,6 @@
 function [matrix, robotLocation, newColorUnderBot] = moveBot(matrix, robotLocation, newRobotLocation, colorUnderBot, doesClean, valueOfGray)
     newColorUnderBot = colorUnderBot;
-
+    
     if robotLocation == newRobotLocation
         return;
     end
