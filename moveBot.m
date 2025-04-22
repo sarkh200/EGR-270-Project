@@ -1,6 +1,6 @@
-function [matrix, robotLocation, newColorUnderBot] = moveBot(matrix, robotLocation, newRobotLocation, colorUnderBot, doesClean, valueOfGray)
+function [matrix, robotLocation, newColorUnderBot, valueOfGray] = moveBot(matrix, robotLocation, newRobotLocation, colorUnderBot, doesClean, valueOfGray)
     newColorUnderBot = colorUnderBot;
-    
+
     if robotLocation == newRobotLocation
         return;
     end
@@ -14,6 +14,7 @@ function [matrix, robotLocation, newColorUnderBot] = moveBot(matrix, robotLocati
         % change the location under the robot back to what it was before robot went over it unless it's cleaning
         if doesClean && (colorUnderBot == 3 || colorUnderBot == 4)
             matrix(robotLocation(1), robotLocation(2)) = valueOfGray;
+            valueOfGray = valueOfGray + 1;
         else
             matrix(robotLocation(1), robotLocation(2)) = colorUnderBot;
         end
