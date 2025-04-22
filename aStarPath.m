@@ -12,17 +12,20 @@ function outPath=aStarPath(matrix, startLocation, endLocation)
     openNodeList(1, :)=startLocation;
 
     while ~isempty(openNodeList)
-        lowestOpenNodeIndex=findLowestFcost(openNodeList);
+        lowestOpenNodeIndex=findLowestFcost(openNodeList, nodeMatrix);
         currentLocation=openNodeList(lowestOpenNodeIndex, :);
         openNodeList(lowestOpenNodeIndex, :)=[];
-        closedNodeList(length(closedNodeList)+1)=currentLocation;
+        closedNodeList(length(closedNodeList)+1, :)=currentLocation;
 
         if currentLocation==endLocation
             break;
         end
 
-        for i=getNeighborLocations(currentLocation)
-            neighborArray=num2cell(i);
+        neighborLocations=getNeighborLocations(currentLocation, matrix);
+
+        for i=1:size(neighborLocations, 1)
+            neighborLocation=neighborLocations(i, :);
+            neighborArray=num2cell(neighborLocation);
             currentArray=num2cell(currentLocation);
 
             if matrix(neighborArray{:})==0&&doesNodeListContain(closedNodeList, currentLocation)
@@ -31,11 +34,11 @@ function outPath=aStarPath(matrix, startLocation, endLocation)
 
             if nodeMatrix(neighborArray{:}).gCost>nodeMatrix(currentArray{:}).gCost+1||doesNodeListContain(openNodeList, currentLocation)==false
                 nodeMatrix(neighborArray{:}).gCost=nodeMatrix(currentArray{:}).gCost+1;
-                nodeMatrix(neighborArray{:}).hCost=distanceBetween(i, endLocation);
+                nodeMatrix(neighborArray{:}).hCost=distanceBetween(neighborLocation, endLocation);
                 nodeMatrix(neighborArray{:}).parentLocation=currentLocation;
 
-                if doesNodeListContain(openNodeList, i)
-                    openNodeList(length(openNodeList)+1)=i;
+                if doesNodeListContain(openNodeList, neighborLocation)
+                    openNodeList(length(openNodeList)+1)=neighborLocation;
                 end
             end
 

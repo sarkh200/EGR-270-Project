@@ -8,6 +8,6 @@ matrix=[
 
 startLocation=[2, 2];
 
-endLocation=[9 2];
+endLocation=[2, 9];
 
 path=aStarPath(matrix, startLocation, endLocation);
