@@ -1,13 +1,14 @@
-[model, plan] = main_menu();
-floorMap = getFloorPlans(plan{1});
+[model, plan]=main_menu();
+floorMap=getFloorPlans(plan{1});
 
 drawFloorPlan(floorMap);
 
-[y, Fs] = audioread('epic_music.mp3');
+[y, Fs]=audioread('epic_music.mp3');
 sound(y, Fs, 16);
 
-
 noahbot(floorMap);
+
+clear sound
 % userInput = '';
 
 % robotLocation = [2, 2]; %the starting location of our roomba
@@ -35,17 +36,17 @@ noahbot(floorMap);
 %             doClean = false;
 %     end
 
-    % [floorMap, robotLocation, colorUnderRobot] = moveBot(floorMap, robotLocation, newRobotLocation, colorUnderRobot, doClean);
+% [floorMap, robotLocation, colorUnderRobot] = moveBot(floorMap, robotLocation, newRobotLocation, colorUnderRobot, doClean);
 
-    % % make sure the location the robot is trying to go to is within the bounds of the map [25 30]
-    % %newRobotLocation(1) is y location ; newRobotLocation(2) is x location
-    % if (newRobotLocation(1) > 0 && newRobotLocation(1) < 31 && newRobotLocation(2) > 0 && newRobotLocation(2) < 26)
-    %     floorMap(robotLocation(1), robotLocation(2)) = colorUnderRobot; % change the location under the robot back to what it was before robot went over it
-    %     %colorUnderRobot = floorMap(newRobotLocation(1), newRobotLocation(2)); %change colorUnderRobot to where the robot is going to go to
-    %     colorUnderRobot = 5;
-    %     floorMap(newRobotLocation(1), newRobotLocation(2)) = 1; %change the location of the robot in the map to the new location
-    %     robotLocation = newRobotLocation; % change the location of the robot to where is wants to go to
-    % end
+% % make sure the location the robot is trying to go to is within the bounds of the map [25 30]
+% %newRobotLocation(1) is y location ; newRobotLocation(2) is x location
+% if (newRobotLocation(1) > 0 && newRobotLocation(1) < 31 && newRobotLocation(2) > 0 && newRobotLocation(2) < 26)
+%     floorMap(robotLocation(1), robotLocation(2)) = colorUnderRobot; % change the location under the robot back to what it was before robot went over it
+%     %colorUnderRobot = floorMap(newRobotLocation(1), newRobotLocation(2)); %change colorUnderRobot to where the robot is going to go to
+%     colorUnderRobot = 5;
+%     floorMap(newRobotLocation(1), newRobotLocation(2)) = 1; %change the location of the robot in the map to the new location
+%     robotLocation = newRobotLocation; % change the location of the robot to where is wants to go to
+% end
 
 %     clc();
 %     drawFloorPlan(floorMap);
