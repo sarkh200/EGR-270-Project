@@ -1,21 +1,19 @@
-classdef tilenode<dlnode
+classdef tilenode
     properties
-        fCost=0
+        parentLocation
+        gCost
+        hCost
     end
     methods
-        function n=tilenode (location, startLocation, endLocation)
+        function n=tilenode (gCost, hCost, parentLocation)
             if nargin==0
-                fCost=0;
-                location=[];
-            else
-                fCost=distanceBetween(location, startLocation)+distanceBetween(location, endLocation);
+                parentLocation=[0, 0];
+                gCost=0;
+                hCost=0;
             end
-            n=n@dlnode(location);
-            n.fCost=fCost;
+            n.gCost=gCost;
+            n.hCost=hCost;
+            n.parentLocation=parentLocation;
         end
     end
-end
-
-function distance=distanceBetween(startLocation, endLocation)
-    distance=max(abs(startLocation(1)-endLocation(1)), abs(startLocation(2)-endLocation(2)));
 end
