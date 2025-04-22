@@ -6,34 +6,36 @@ drawFloorPlan(floorMap);
 [y, Fs] = audioread('epic_music.mp3');
 sound(y, Fs, 16);
 
-userInput = '';
 
-robotLocation = [2, 2]; %the starting location of our roomba
+noahbot(floorMap);
+% userInput = '';
 
-colorUnderRobot = floorMap(robotLocation(1), robotLocation(2)); %color under initial location (bound to change after loop)
+% robotLocation = [2, 2]; %the starting location of our roomba
 
-doClean = false;
+% colorUnderRobot = floorMap(robotLocation(1), robotLocation(2)); %color under initial location (bound to change after loop)
 
-while strcmp(userInput, 'end') == false %Pseudocode practice: direct input of movement (WASD)
-    userInput = input('>', 's');
-    newRobotLocation = robotLocation;
+% doClean = false;
 
-    switch userInput
-        case 'w'
-            newRobotLocation(1) = robotLocation(1) - 1;
-        case 's'
-            newRobotLocation(1) = robotLocation(1) + 1;
-        case 'a'
-            newRobotLocation(2) = robotLocation(2) - 1;
-        case 'd'
-            newRobotLocation(2) = robotLocation(2) + 1;
-        case 'c'
-            doClean = true;
-        case 'm'
-            doClean = false;
-    end
+% while strcmp(userInput, 'end') == false %Pseudocode practice: direct input of movement (WASD)
+%     userInput = input('>', 's');
+%     newRobotLocation = robotLocation;
 
-    [floorMap, robotLocation, colorUnderRobot] = moveBot(floorMap, robotLocation, newRobotLocation, colorUnderRobot, doClean);
+%     switch userInput
+%         case 'w'
+%             newRobotLocation(1) = robotLocation(1) - 1;
+%         case 's'
+%             newRobotLocation(1) = robotLocation(1) + 1;
+%         case 'a'
+%             newRobotLocation(2) = robotLocation(2) - 1;
+%         case 'd'
+%             newRobotLocation(2) = robotLocation(2) + 1;
+%         case 'c'
+%             doClean = true;
+%         case 'm'
+%             doClean = false;
+%     end
+
+    % [floorMap, robotLocation, colorUnderRobot] = moveBot(floorMap, robotLocation, newRobotLocation, colorUnderRobot, doClean);
 
     % % make sure the location the robot is trying to go to is within the bounds of the map [25 30]
     % %newRobotLocation(1) is y location ; newRobotLocation(2) is x location
@@ -45,6 +47,6 @@ while strcmp(userInput, 'end') == false %Pseudocode practice: direct input of mo
     %     robotLocation = newRobotLocation; % change the location of the robot to where is wants to go to
     % end
 
-    clc();
-    drawFloorPlan(floorMap);
-end
+%     clc();
+%     drawFloorPlan(floorMap);
+% end

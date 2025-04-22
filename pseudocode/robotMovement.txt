@@ -1,14 +1,39 @@
 map = getMapFromFile(file); //map that is displayed (affected)
 movementMap(25 30) = 0;
 
-movement(){
-    Movement loop: (proven false by stepping on black dot ( 0 in matrix ))
-        Turn down (if false) 
-        turn right (if false)
-        turn up (if false)
-        turn left (if false)
-        
-        recordSteps()//gray blocks
-}
+    FLOORPLAN DEFINITION:
+        0 is black (can't move)
+        1 is red (current robot location)
+        2 is blue (charger and starting location)
+        3 is brown (dirty floor)
+        4 is white (regular floor)
+        5 is grey (cleaned floor)
 
-returning()
+noahbot: 
+    Variables needed:
+     *Prompt for matrix (outside function)
+     *record bot position (inside function)
+     *Charger (starting position and return position) (inside function)
+     starting position = charger position
+
+    Robot
+        while loop (iterates till either whole floor is cleaned or till bot runs low on battery)
+            look up if position(i+1, ) == 0||5
+                if false move bot to new location
+            look right if  position( , i+1) == 0||5
+            look down if position( i-1, ) ==0||5
+            look left if position( , i -1) ==0||5
+        end
+
+    Movement    
+        *Record previous position with an increasing value by 1. to keep track of most recently cleaned floors.
+        In order to back track to position of battery death.
+        *When battery dies A* back to charger. Then take advantage of cleaned flors system.
+        
+Order of Precedence (loop)
+    1. Brown (3)
+    2. White (4)
+    3. grey (5:i+1)
+    4. Black (0)
+    
+        
