@@ -11,16 +11,16 @@ function noahbot(matrix)
         drawFloorPlan(matrix);
         pause(0.01);
         
-        if matrix(robotPosition(1) - 1, robotPosition(2)) ~= 0 %checks up for black
+        if matrix(robotPosition(1) - 1, robotPosition(2)) == 4 %checks up for black
             newRobotPosition = [robotPosition(1) - 1, robotPosition(2)];
             [matrix, robotPosition, colorUnderRobot] = moveBot(matrix, robotPosition, newRobotPosition, colorUnderRobot, true);
-        elseif matrix(robotPosition(1), robotPosition(2) + 1) ~= 0 %checks right for black
+        elseif matrix(robotPosition(1), robotPosition(2) + 1) == 4  %checks right for black
             newRobotPosition = [robotPosition(1), robotPosition(2) + 1];
             [matrix, robotPosition, colorUnderRobot] = moveBot(matrix, robotPosition, newRobotPosition, colorUnderRobot, true);
-        elseif matrix(robotPosition(1) + 1, robotPosition(2)) ~= 0 %checks bottom for black
+        elseif matrix(robotPosition(1) + 1, robotPosition(2)) == 4 %checks bottom for black
             newRobotPosition = [robotPosition(1) + 1, robotPosition(2)];
             [matrix, robotPosition, colorUnderRobot] = moveBot(matrix, robotPosition, newRobotPosition, colorUnderRobot, true);
-        elseif matrix(robotPosition(1), robotPosition(2) -1) ~= 0 %checks left for black
+        elseif matrix(robotPosition(1), robotPosition(2) -1) == 4 %checks left for black
             newRobotPosition = [robotPosition(1), robotPosition(2) -1];
             [matrix, robotPosition, colorUnderRobot] = moveBot(matrix, robotPosition, newRobotPosition, colorUnderRobot, true);
         end
