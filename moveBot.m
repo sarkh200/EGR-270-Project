@@ -1,4 +1,4 @@
-function [matrix, robotLocation, newColorUnderBot, valueOfGray] = moveBot(matrix, robotLocation, newRobotLocation, colorUnderBot, doesClean, valueOfGray)
+function [matrix, robotLocation, newColorUnderBot, batteryLife, valueOfGray] = moveBot(matrix, robotLocation, newRobotLocation, colorUnderBot, batteryLife, doesClean, valueOfGray)
     newColorUnderBot = colorUnderBot;
 
     if robotLocation == newRobotLocation
@@ -15,6 +15,7 @@ function [matrix, robotLocation, newColorUnderBot, valueOfGray] = moveBot(matrix
         if doesClean && (colorUnderBot == 3 || colorUnderBot == 4)
             matrix(robotLocation(1), robotLocation(2)) = valueOfGray;
             valueOfGray = valueOfGray + 1;
+            batteryLife = batteryLife - 1;
         else
             matrix(robotLocation(1), robotLocation(2)) = colorUnderBot;
         end
