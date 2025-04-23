@@ -29,18 +29,22 @@ function outPath=aStarPath(matrix, startLocation, endLocation)
         for i=1:size(neighborLocations, 1)
             neighborLocation=neighborLocations(i, :);
             neighborArray=num2cell(neighborLocation);
-            currentArray=num2cell(currentLocation);
+            currentArray=num2cell(currentLocation+1);
 
             if matrix(neighborArray{:})==0&&doesNodeListContain(closedNodeList, neighborArray)
                 continue;
             end
 
-            if nodeMatrix(currentArray{:}).gCost>nodeMatrix(currentArray{:}).gCost+1||doesNodeListContain(openNodeList, currentLocation)==false
+            
+            if nodeMatrix(neighborArray{:}).gCost>nodeMatrix(currentArray{:}).gCost+1||doesNodeListContain(openNodeList, neighborLocation)==false
                 nodeMatrix(neighborArray{:}).gCost=nodeMatrix(currentArray{:}).gCost+1;
                 nodeMatrix(neighborArray{:}).hCost=distanceBetween(neighborLocation, endLocation);
                 nodeMatrix(neighborArray{:}).parentLocation=currentLocation;
+                fprintf("\nneighbor gCost: %i; current gCost: %i\n", nodeMatrix(neighborArray{:}).gCost, nodeMatrix(currentArray{:}).gCost)
 
-                fprintf("Node at %i, %i:\n gCost = %i\n hCost = %i\n parentLocation = %i %i\n", neighborArray{:}, nodeMatrix(neighborArray{:}).gCost, nodeMatrix(neighborArray{:}).hCost, nodeMatrix(neighborArray{:}).parentLocation);
+                % disp(neighborArray)
+                % disp(nodeMatrix(neighborArray{:}))
+                fprintf("Node at %i, %i:\n gCost = %i\n hCost = %i\n parentLocation = %i, %i\n", neighborArray{:}, nodeMatrix(neighborArray{:}).gCost, nodeMatrix(neighborArray{:}).hCost, nodeMatrix(neighborArray{:}).parentLocation);
 
                 if ~doesNodeListContain(openNodeList, neighborLocation)
                     openNodeList(size(openNodeList, 1)+1, :)=neighborLocation;
@@ -67,6 +71,7 @@ function availableNodes=getNeighborLocations(location, matrix)
 
     for i=1:8
         nC=c; nR=r;
+
         switch i
             case 1
                 nC=c+1;
@@ -147,8 +152,12 @@ function outPath=getPathFromMatrix(nodeMatrix, startLocation, endLocation)
 
     while currentLocation~=startLocation
         currentArray=num2cell(currentLocation);
-        outPath(index, :)=currentLocation;
+        disp(currentArray)
+        disp(nodeMatrix(currentArray{:}))
+        outPath(index, :)=[currentArray{:}];
         currentLocation=nodeMatrix(currentArray{:}).parentLocation;
+        pause(.5)
+        index=index+1;
     end
 
 end
