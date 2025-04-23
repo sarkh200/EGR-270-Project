@@ -3,7 +3,7 @@ floorMap=getFloorPlans(plan{1});
 
 drawFloorPlan(floorMap);
 
-[y, Fs]=audioread('epic_music.mp3');
+[y, Fs]=audioread('sounds/epic_music.mp3');
 sound(y, Fs, 16);
 
 noahbot(floorMap);

@@ -23,7 +23,11 @@ function noahbot(matrix)
             newRobotPosition=[robotPosition(1), robotPosition(2)-1];
             [matrix, robotPosition, colorUnderRobot, valueOfGray]=moveBot(matrix, robotPosition, newRobotPosition, colorUnderRobot, true, valueOfGray);
         else
+            clear sound
             disp("Stuck!");
+            [y, Fs]=audioread('sounds/badunk.mp3');
+            badunk=audioplayer(y, Fs, 16);
+            playblocking(badunk);
             break
         end
 
