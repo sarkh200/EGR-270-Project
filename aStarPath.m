@@ -35,8 +35,8 @@ function outPath=aStarPath(matrix, startLocation, endLocation)
                 continue;
             end
 
-            
             if nodeMatrix(neighborArray{:}).gCost>nodeMatrix(currentArray{:}).gCost+1||doesNodeListContain(openNodeList, neighborLocation)==false
+                
                 nodeMatrix(neighborArray{:}).gCost=nodeMatrix(currentArray{:}).gCost+1;
                 nodeMatrix(neighborArray{:}).hCost=distanceBetween(neighborLocation, endLocation);
                 nodeMatrix(neighborArray{:}).parentLocation=currentLocation;
