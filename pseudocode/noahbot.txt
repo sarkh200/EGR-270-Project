@@ -1,0 +1,53 @@
+function noahbot(matrix)
+
+- Find the row and column of the charger in the matrix (value 2):
+[charger_row, charger_col] = find(matrix == 2)
+
+- Start the robot at the charger's position:
+robotPosition = [charger_row, charger_col]
+
+- Get the color value under the robot's position:
+valueofGray = 5
+
+- Clean while dirty squares exist:
+while(elemen 3 in matrix) or (element 4 in matrix)
+
+- Robot checks up:
+if matrix[robotPosition[1] - 1, robotPosition[2]] is 3 or 4
+    newRobotPosition = [robotPosition[1] - 1, robotPosition[2]]
+    - Color the square robot went thru gray:
+    [matrix, robotPosition, colorUnderRobot, valueofGray] = moveBot(matrix, robotPosition, newRobotPosition, colorUnderRobot, true, valueofGray)
+
+- Robot checks right:
+else if matrix[robotPosition[1], robotPosition[2]] is 3 or 4
+    newRobotPosition = [robotPosition[1], robotPosition[2] + 1]
+    - Color the square robot went thru gray:
+    [matrix, robotPosition, colorUnderRobot, valueofGray] = moveBot(matrix, robotPosition, newRobotPosition, colorUnderRobot, true, valueofGray)
+
+- Robot checks down:
+else if matrix[robotPosition[1] + 1, robotPosition[2]] is 3 or 4
+    newRobotPosition = [robotPosition[1] + 1, robotPosition[2]]
+    - Color the square robot went thru gray:
+    [matrix, robotPosition, colorUnderRobot, valueofGray] = moveBot(matrix, robotPosition, newRobotPosition, colorUnderRobot, true, valueofGray)
+
+- Robot checks left:
+else if matrix[robotPosition[1], robotPosition[2] - 1] is 3 or 4
+    newRobotPosition = [robotPosition[1], robotPosition[2] - 1]
+    - Color the square robot went thru gray:
+    [matrix, robotPosition, colorUnderRobot, valueofGray] = moveBot(matrix, robotPosition, newRobotPosition, colorUnderRobot, true, valueofGray)
+
+- If there are no non-gray squares nearby, play a sound, say "Stuck!", and end function:
+else
+    clear sound
+    display "Stuck!"
+    [audio_data, sampling_rate] = audioread('sounds/badunk.mp3')
+    badunk = audioplayer(audio_data, sampling_rate, 16)
+    playblocking(badunk)
+    break
+    end if
+
+    drawFloorPlan(matrix)
+    pause(0.01)
+   end while
+end function
+
