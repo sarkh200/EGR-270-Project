@@ -7,4 +7,5 @@ function [choice_model, choice_floor] = main_menu()
     dlgtitle = 'Floor Name';
     fieldsize = [1 45];
     choice_floor = inputdlg(prompt, dlgtitle, fieldsize);
+    choice_floor = choice_floor{1};
 end

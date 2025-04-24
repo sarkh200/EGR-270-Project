@@ -1,0 +1,34 @@
+% pseudocode based on Sebastian Lague https://youtu.be/-L-WgKMFuhE?t=469
+
+% gCost = distance from the start node
+% hCost = distance from the end node
+% fCost = gCost + hCost
+
+function path = aStarPath(startLocation, endLocation)
+
+openNodeList = []
+closedNodeList = []
+
+startNode = dlnode(startLocation)
+
+add startNode to openNodeList
+
+% loops until exited by finding path to endLocation
+while True
+	currentNode = node in openNodeList with the lowest fCost
+	remove currentNode from openNodeList
+	add currentNode to closedNodeList
+
+	if currentNode.Data == endLocation
+		break
+
+	foreach neighborNode of currentNode
+		if neighborNode is not traversable or closedNodeList contains neighborNode
+			skip to next neighborNode
+
+		if new path to neighborNode is shorter or neighborNode is not in openNodeList
+			set fCost of neighborNode
+			set parent of neighborNode to currentNode
+			if neighborNode is not in openNodeList
+				add neighborNode to openNodeList
+end
