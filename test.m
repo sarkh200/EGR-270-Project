@@ -1,12 +1,21 @@
 [model, plan]=main_menu();
-floorMap=getFloorPlans(plan{1});
+floorMap=getFloorPlans(plan);
+
+switch model
+    case 1
+        batteryLife=250;
+    case 2
+        batteryLife=350;
+    case 3
+        batteryLife=250;
+end
 
 drawFloorPlan(floorMap);
 
 [y, Fs]=audioread('sounds/epic_music.mp3');
 sound(y, Fs, 16);
 
-noahbot(floorMap);
+noahbot(floorMap, batteryLife);
 
 clear sound
 % userInput = '';

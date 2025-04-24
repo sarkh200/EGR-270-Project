@@ -158,7 +158,10 @@ function outPath=getPathFromMatrix(nodeMatrix, startLocation, endLocation)
         currentArray=num2cell(currentLocation);
         % disp(currentArray)
         % disp(nodeMatrix(currentArray{:}))
-        outPath(index, :)=currentLocation;
+
+        if ~ismember(0, currentLocation)
+            outPath(index, :)=currentLocation;
+        end
         currentLocation=nodeMatrix(currentArray{:}).parentLocation;
         index=index+1;
     end
@@ -168,5 +171,7 @@ function outPath=getPathFromMatrix(nodeMatrix, startLocation, endLocation)
     outPath(index, :)=currentLocation;
 
     outPath=flip(outPath, 1);
+
+    outPath=outPath(any(outPath, 2), any(outPath, 1));
 
 end
