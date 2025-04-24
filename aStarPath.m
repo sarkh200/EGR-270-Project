@@ -69,6 +69,8 @@ function availableNodes=getNeighborLocations(location, matrix)
     nodeCount=0;
     availableNodes(8, :)=[0, 0];
 
+    %fprintf("\n\n");
+
     for i=1:8
         nC=c; nR=r;
 
@@ -91,17 +93,19 @@ function availableNodes=getNeighborLocations(location, matrix)
                 nC=c+1; nR=r-1;
         end
 
-        if nR>0&&nR<rows&&nC>0&&nC<columns&&matrix(nR, nC)~=0
-            nodeCount=nodeCount+1;
-            availableNodes(nodeCount, :)=[nR, nC];
+        if nR>0&&nR<rows&&nC>0&&nC<columns
+            %fprintf("%i ", matrix(nR, nC));
+            if matrix(nR, nC)~=0
+                nodeCount=nodeCount+1;
+                availableNodes(nodeCount, :)=[nR, nC];
+            end
         end
 
         availableNodes=availableNodes(1:nodeCount, :);
 
-        if nodeCount==0
-            error("No neighbors found");
-        end
-
+    end
+    if isempty(availableNodes)
+        error("No neighbors found");
     end
 
 end
@@ -150,8 +154,10 @@ function outPath=getPathFromMatrix(nodeMatrix, startLocation, endLocation)
     currentLocation=endLocation;
     index=1;
 
-    while currentLocation~=startLocation
+    while ~all(currentLocation==startLocation)
         currentArray=num2cell(currentLocation);
+        % disp(currentArray)
+        % disp(nodeMatrix(currentArray{:}))
         outPath(index, :)=currentLocation;
         currentLocation=nodeMatrix(currentArray{:}).parentLocation;
         index=index+1;
@@ -160,5 +166,7 @@ function outPath=getPathFromMatrix(nodeMatrix, startLocation, endLocation)
     currentArray=num2cell(currentLocation);
     currentLocation=nodeMatrix(currentArray{:}).parentLocation;
     outPath(index, :)=currentLocation;
+
+    outPath=flip(outPath, 1);
 
 end
