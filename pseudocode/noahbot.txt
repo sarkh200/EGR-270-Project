@@ -1,51 +1,52 @@
 function noahbot(matrix)
 %Get initial position of the charging station and value under the robot's starting position
 
-Find the row and column of the charger in the matrix (value 2)
+SET chargerPosition to position of value 2 in matrix
 
-Start the robot at the charger's position
+SET robotPosition to chargerPosition
 
-Get the color value under the robot's position
-Set valueofGray to 5 %Used to mark cleaned areas
+%Get the value under the robot's starting position
+SET colorUnderRobot to matrix at robotPosition
+SET valueofGray to 5 %Used to mark cleaned areas
 
 While matrix contains value 3 (dirty) or 4 (clean) squares
 
 %Robot checks up
-    if the square above robotPosition is 3 or 4, Then
-    Set newRobotPosition to one row up
-    Call moveBot with current state and update matrix, robotPosition, colorUnderRobot, valueofGray
+    IF the square above robotPosition is 3 or 4, Then
+    SET newRobotPosition to one row up
+    CALL moveBot with current state and update matrix, robotPosition, colorUnderRobot, valueofGray
     
 
 %Robot checks right
-else if the square above robotPosition is 3 or 4, Then
-    Set newRobotPosition to one row right
-    Call moveBot with current state and update matrix, robotPosition, colorUnderRobot, valueofGray
+ELSE IF the square above robotPosition is 3 or 4, Then
+    SET newRobotPosition to one row right
+    CALL moveBot with current state and update matrix, robotPosition, colorUnderRobot, valueofGray
 
 
 %Robot checks down
-else if the square above robotPosition is 3 or 4, Then
-    Set newRobotPosition to one row down
-    Call moveBot with current state and update matrix, robotPosition, colorUnderRobot, valueofGray
+ELSE IF the square above robotPosition is 3 or 4, Then
+    SET newRobotPosition to one row down
+    CALL moveBot with current state and update matrix, robotPosition, colorUnderRobot, valueofGray
 
 
 $Robot checks left
-else if the square above robotPosition is 3 or 4, Then
-    Set newRobotPosition to one row left
-    Call moveBot with current state and update matrix, robotPosition, colorUnderRobot, valueofGray
+ELSE IF the square above robotPosition is 3 or 4, Then
+    SET newRobotPosition to one row left
+    CALL moveBot with current state and update matrix, robotPosition, colorUnderRobot, valueofGray
 
 
 %No available moves
-else
+ELSE
     display "Stuck!"
     Play error sound ('badunk.mp3')
     Exit loop
-    end if
+    ENDIF
 
    %Visual update of matrix
-   Call drawFloorPlan(matrix)
-   Wait 0.01 seconds for animation
+   CALL drawFloorPlan(matrix)
+   WAIT 0.01 seconds for animation
    
-   end while
+   END WHILE
 
-end function
+END FUNCTION
 
