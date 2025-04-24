@@ -1,53 +1,51 @@
 function noahbot(matrix)
+%Get initial position of the charging station and value under the robot's starting position
 
-- Find the row and column of the charger in the matrix (value 2):
-[charger_row, charger_col] = find(matrix == 2)
+Find the row and column of the charger in the matrix (value 2)
 
-- Start the robot at the charger's position:
-robotPosition = [charger_row, charger_col]
+Start the robot at the charger's position
 
-- Get the color value under the robot's position:
-valueofGray = 5
+Get the color value under the robot's position
+Set valueofGray to 5 %Used to mark cleaned areas
 
-- Clean while dirty squares exist:
-while(elemen 3 in matrix) or (element 4 in matrix)
+While matrix contains value 3 (dirty) or 4 (clean) squares
 
-- Robot checks up:
-if matrix[robotPosition[1] - 1, robotPosition[2]] is 3 or 4
-    newRobotPosition = [robotPosition[1] - 1, robotPosition[2]]
-    - Color the square robot went thru gray:
-    [matrix, robotPosition, colorUnderRobot, valueofGray] = moveBot(matrix, robotPosition, newRobotPosition, colorUnderRobot, true, valueofGray)
+%Robot checks up
+    if the square above robotPosition is 3 or 4, Then
+    Set newRobotPosition to one row up
+    Call moveBot with current state and update matrix, robotPosition, colorUnderRobot, valueofGray
+    
 
-- Robot checks right:
-else if matrix[robotPosition[1], robotPosition[2]] is 3 or 4
-    newRobotPosition = [robotPosition[1], robotPosition[2] + 1]
-    - Color the square robot went thru gray:
-    [matrix, robotPosition, colorUnderRobot, valueofGray] = moveBot(matrix, robotPosition, newRobotPosition, colorUnderRobot, true, valueofGray)
+%Robot checks right
+else if the square above robotPosition is 3 or 4, Then
+    Set newRobotPosition to one row right
+    Call moveBot with current state and update matrix, robotPosition, colorUnderRobot, valueofGray
 
-- Robot checks down:
-else if matrix[robotPosition[1] + 1, robotPosition[2]] is 3 or 4
-    newRobotPosition = [robotPosition[1] + 1, robotPosition[2]]
-    - Color the square robot went thru gray:
-    [matrix, robotPosition, colorUnderRobot, valueofGray] = moveBot(matrix, robotPosition, newRobotPosition, colorUnderRobot, true, valueofGray)
 
-- Robot checks left:
-else if matrix[robotPosition[1], robotPosition[2] - 1] is 3 or 4
-    newRobotPosition = [robotPosition[1], robotPosition[2] - 1]
-    - Color the square robot went thru gray:
-    [matrix, robotPosition, colorUnderRobot, valueofGray] = moveBot(matrix, robotPosition, newRobotPosition, colorUnderRobot, true, valueofGray)
+%Robot checks down
+else if the square above robotPosition is 3 or 4, Then
+    Set newRobotPosition to one row down
+    Call moveBot with current state and update matrix, robotPosition, colorUnderRobot, valueofGray
 
-- If there are no non-gray squares nearby, play a sound, say "Stuck!", and end function:
+
+$Robot checks left
+else if the square above robotPosition is 3 or 4, Then
+    Set newRobotPosition to one row left
+    Call moveBot with current state and update matrix, robotPosition, colorUnderRobot, valueofGray
+
+
+%No available moves
 else
-    clear sound
     display "Stuck!"
-    [audio_data, sampling_rate] = audioread('sounds/badunk.mp3')
-    badunk = audioplayer(audio_data, sampling_rate, 16)
-    playblocking(badunk)
-    break
+    Play error sound ('badunk.mp3')
+    Exit loop
     end if
 
-    drawFloorPlan(matrix)
-    pause(0.01)
+   %Visual update of matrix
+   Call drawFloorPlan(matrix)
+   Wait 0.01 seconds for animation
+   
    end while
+
 end function
 
