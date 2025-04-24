@@ -1,5 +1,7 @@
 function floorMap = getFloorPlans(inFileName)
     inFid = fopen(inFileName);
-    floorMap = fscanf(inFid, '%i', [25 30])';
+    columns = length(erase(fgetl(inFid), " "));
+    fseek(inFid, 0, 'bof');
+    floorMap = fscanf(inFid, '%i', [columns, Inf])';
     fclose(inFid);
 end
