@@ -17,8 +17,9 @@ function outPath=aStarPath(matrix, startLocation, endLocation)
         openNodeList(lowestOpenNodeIndex, :)=[];
         closedNodeList(length(closedNodeList)+1, :)=currentLocation;
 
-        fprintf("\n\n\n\n");
-        disp(currentLocation);
+        % fprintf("\n\n\n\n");
+        % disp(currentLocation);
+        % fprintf("Parent Node at %i, %i:\n gCost = %i\n hCost = %i\n parentLocation = %i, %i\n", neighborArray{:}, nodeMatrix(neighborArray{:}).gCost, nodeMatrix(neighborArray{:}).hCost, nodeMatrix(neighborArray{:}).parentLocation);
 
         if all(currentLocation==endLocation)
             break;
@@ -29,22 +30,21 @@ function outPath=aStarPath(matrix, startLocation, endLocation)
         for i=1:size(neighborLocations, 1)
             neighborLocation=neighborLocations(i, :);
             neighborArray=num2cell(neighborLocation);
-            currentArray=num2cell(currentLocation+1);
+            currentArray=num2cell(currentLocation);
 
-            if matrix(neighborArray{:})==0&&doesNodeListContain(closedNodeList, neighborArray)
+            if matrix(neighborArray{:})==0||doesNodeListContain(closedNodeList, neighborLocation)
                 continue;
             end
 
             if nodeMatrix(neighborArray{:}).gCost>nodeMatrix(currentArray{:}).gCost+1||doesNodeListContain(openNodeList, neighborLocation)==false
-                
+                % disp(nodeMatrix(currentArray{:}).gCost+1);
                 nodeMatrix(neighborArray{:}).gCost=nodeMatrix(currentArray{:}).gCost+1;
                 nodeMatrix(neighborArray{:}).hCost=distanceBetween(neighborLocation, endLocation);
                 nodeMatrix(neighborArray{:}).parentLocation=currentLocation;
-                fprintf("\nneighbor gCost: %i; current gCost: %i\n", nodeMatrix(neighborArray{:}).gCost, nodeMatrix(currentArray{:}).gCost)
 
                 % disp(neighborArray)
                 % disp(nodeMatrix(neighborArray{:}))
-                fprintf("Node at %i, %i:\n gCost = %i\n hCost = %i\n parentLocation = %i, %i\n", neighborArray{:}, nodeMatrix(neighborArray{:}).gCost, nodeMatrix(neighborArray{:}).hCost, nodeMatrix(neighborArray{:}).parentLocation);
+                % fprintf("Node at %i, %i:\n gCost = %i\n hCost = %i\n parentLocation = %i, %i\n", neighborArray{:}, nodeMatrix(neighborArray{:}).gCost, nodeMatrix(neighborArray{:}).hCost, nodeMatrix(neighborArray{:}).parentLocation);
 
                 if ~doesNodeListContain(openNodeList, neighborLocation)
                     openNodeList(size(openNodeList, 1)+1, :)=neighborLocation;
@@ -152,12 +152,13 @@ function outPath=getPathFromMatrix(nodeMatrix, startLocation, endLocation)
 
     while currentLocation~=startLocation
         currentArray=num2cell(currentLocation);
-        disp(currentArray)
-        disp(nodeMatrix(currentArray{:}))
-        outPath(index, :)=[currentArray{:}];
+        outPath(index, :)=currentLocation;
         currentLocation=nodeMatrix(currentArray{:}).parentLocation;
-        pause(.5)
         index=index+1;
     end
+
+    currentArray=num2cell(currentLocation);
+    currentLocation=nodeMatrix(currentArray{:}).parentLocation;
+    outPath(index, :)=currentLocation;
 
 end
