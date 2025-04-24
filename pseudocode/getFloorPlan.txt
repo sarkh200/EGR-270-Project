@@ -1,0 +1,17 @@
+FUNCTION getFloorPlans(fileName)
+
+    OPEN the file named fileName
+
+    READ the first line and remove spaces
+    SET columns to length of that line
+
+    RESET file to the beginning
+
+    READ all integers from the file into a matrix with 'columns' columns
+    TRANSPOSE the matrix to correct orientation
+
+    Close file
+
+    RETURN the matrix as floorMap
+
+END FUNCTION
