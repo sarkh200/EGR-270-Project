@@ -1,10 +1,10 @@
-Function moveBot(matrix, robotLocation, newRobotLocation, colorUnderBot, batteryLife, doesClean, valueOfGray)
+Function moveBot(matrix, robotLocation, newRobotLocation, colorUnderBot, batteryLife, doesClean, batteryLife)
 
     SET newColorUnderbot to colorUnderBot
 
     %If robot is not moving, don't do anything
     IF robotLocation is equal to newRobotLocation Then
-        Return matrix, robotLocation, newColorUnderbot, batteryLife, valueOfGray
+        Return matrix, robotLocation, newColorUnderbot, batteryLife, batteryLife
     ENDIF
 
     %Get map dimensions
@@ -16,8 +16,8 @@ Function moveBot(matrix, robotLocation, newRobotLocation, colorUnderBot, battery
 
         %If robot is cleaning and the current square is clean (3) or dirty (4)
         IF doesClean and (colorUnderBot is 3 or 4) Then
-            Set matrix at robotLocation to valueOfGray
-            Increment valueOfGray by 1
+            Set matrix at robotLocation to batteryLife
+            Increment batteryLife by 1
             Decrement batteryLife by 1
         ELSE
             Set matrix at robotLocation to colorUnderBot
@@ -34,6 +34,6 @@ Function moveBot(matrix, robotLocation, newRobotLocation, colorUnderBot, battery
 
     ENDIF
 
-    RETURN matrix, robotLocation, newColorUnderbot, batteryLife, valueOfGray
+    RETURN matrix, robotLocation, newColorUnderbot, batteryLife, batteryLife
 
 END FUNCTION

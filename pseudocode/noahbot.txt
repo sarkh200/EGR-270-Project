@@ -7,32 +7,32 @@ SET robotPosition to chargerPosition
 
 %Get the value under the robot's starting position
 SET colorUnderRobot to matrix at robotPosition
-SET valueofGray to 5 %Used to mark cleaned areas
+SET batteryLife to 5 %Used to mark cleaned areas
 
 While matrix contains value 3 (dirty) or 4 (clean) squares
 
 %Robot checks up
     IF the square above robotPosition is 3 or 4, Then
     SET newRobotPosition to one row up
-    CALL moveBot with current state and update matrix, robotPosition, colorUnderRobot, valueofGray
+    CALL moveBot with current state and update matrix, robotPosition, colorUnderRobot, batteryLife
     
 
 %Robot checks right
 ELSE IF the square above robotPosition is 3 or 4, Then
     SET newRobotPosition to one row right
-    CALL moveBot with current state and update matrix, robotPosition, colorUnderRobot, valueofGray
+    CALL moveBot with current state and update matrix, robotPosition, colorUnderRobot, batteryLife
 
 
 %Robot checks down
 ELSE IF the square above robotPosition is 3 or 4, Then
     SET newRobotPosition to one row down
-    CALL moveBot with current state and update matrix, robotPosition, colorUnderRobot, valueofGray
+    CALL moveBot with current state and update matrix, robotPosition, colorUnderRobot, batteryLife
 
 
 $Robot checks left
 ELSE IF the square above robotPosition is 3 or 4, Then
     SET newRobotPosition to one row left
-    CALL moveBot with current state and update matrix, robotPosition, colorUnderRobot, valueofGray
+    CALL moveBot with current state and update matrix, robotPosition, colorUnderRobot, batteryLife
 
 
 %No available moves
