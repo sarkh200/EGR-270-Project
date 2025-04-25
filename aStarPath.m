@@ -6,7 +6,6 @@ function outPath=aStarPath(matrix, startLocation, endLocation)
 
     nodeMatrix(startLocation(2), startLocation(1))=tilenode(0, distanceBetween(startLocation, endLocation), startLocation);
 
-    %openNodeList=[0, 0];
     closedNodeList=[0, 0];
 
     openNodeList(1, :)=startLocation;
@@ -16,10 +15,6 @@ function outPath=aStarPath(matrix, startLocation, endLocation)
         currentLocation=openNodeList(lowestOpenNodeIndex, :);
         openNodeList(lowestOpenNodeIndex, :)=[];
         closedNodeList(length(closedNodeList)+1, :)=currentLocation;
-
-        % fprintf("\n\n\n\n");
-        % disp(currentLocation);
-        % fprintf("Parent Node at %i, %i:\n gCost = %i\n hCost = %i\n parentLocation = %i, %i\n", neighborArray{:}, nodeMatrix(neighborArray{:}).gCost, nodeMatrix(neighborArray{:}).hCost, nodeMatrix(neighborArray{:}).parentLocation);
 
         if all(currentLocation==endLocation)
             break;
@@ -37,14 +32,9 @@ function outPath=aStarPath(matrix, startLocation, endLocation)
             end
 
             if nodeMatrix(neighborArray{:}).gCost>nodeMatrix(currentArray{:}).gCost+1||doesNodeListContain(openNodeList, neighborLocation)==false
-                % disp(nodeMatrix(currentArray{:}).gCost+1);
                 nodeMatrix(neighborArray{:}).gCost=nodeMatrix(currentArray{:}).gCost+1;
                 nodeMatrix(neighborArray{:}).hCost=distanceBetween(neighborLocation, endLocation);
                 nodeMatrix(neighborArray{:}).parentLocation=currentLocation;
-
-                % disp(neighborArray)
-                % disp(nodeMatrix(neighborArray{:}))
-                % fprintf("Node at %i, %i:\n gCost = %i\n hCost = %i\n parentLocation = %i, %i\n", neighborArray{:}, nodeMatrix(neighborArray{:}).gCost, nodeMatrix(neighborArray{:}).hCost, nodeMatrix(neighborArray{:}).parentLocation);
 
                 if ~doesNodeListContain(openNodeList, neighborLocation)
                     openNodeList(size(openNodeList, 1)+1, :)=neighborLocation;
@@ -69,8 +59,6 @@ function availableNodes=getNeighborLocations(location, matrix)
     nodeCount=0;
     availableNodes(8, :)=[0, 0];
 
-    %fprintf("\n\n");
-
     for i=1:8
         nC=c; nR=r;
                 
@@ -94,7 +82,6 @@ function availableNodes=getNeighborLocations(location, matrix)
         end
 
         if nR>0&&nR<rows&&nC>0&&nC<columns
-            %fprintf("%i ", matrix(nR, nC));
             if matrix(nR, nC)~=0
                 nodeCount=nodeCount+1;
                 availableNodes(nodeCount, :)=[nR, nC];
@@ -156,9 +143,6 @@ function outPath=getPathFromMatrix(nodeMatrix, startLocation, endLocation)
 
     while ~all(currentLocation==startLocation)
         currentArray=num2cell(currentLocation);
-        % disp(currentArray)
-        % disp(nodeMatrix(currentArray{:}))
-
         if ~ismember(0, currentLocation)
             outPath(index, :)=currentLocation;
         end
