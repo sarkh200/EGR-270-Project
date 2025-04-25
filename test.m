@@ -3,7 +3,7 @@ floorMap=getFloorPlans(plan);
 
 switch model
     case 1
-        batteryLife=50;
+        batteryLife=250;
     case 2
         batteryLife=350;
     case 3
