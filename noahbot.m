@@ -1,44 +1,42 @@
 function batteryLife=noahbot(matrix, maxBatteryLife)
-    batteryLife = maxBatteryLife;
+    [y, Fs]=audioread('sounds/epic_music.mp3');
+    sound(y, Fs, 16);
+    batteryLife=maxBatteryLife;
     %Pulls the position of the charger based on the map matrix given
     [r, c]=find(matrix==2);
     %Variables
     charger=[r, c];
     robotPosition=charger;
-    colorUnderRobot=matrix(robotPosition(1), robotPosition(2));
-    % ~isempty(find(matrix==3, 1))
+    colorUnderBot=matrix(robotPosition(1), robotPosition(2));
     while ismember(3, matrix)||ismember(4, matrix)
-        if batteryLife <= 0
-            deadSpace = robotPosition;
-            path = aStarPath(matrix, robotPosition, charger);
-            [matrix, robotPosition, colorUnderRobot] = moveAlongPath(matrix, path, colorUnderRobot, batteryLife);
-            batteryLife = maxBatteryLife;
-            path = aStarPath(matrix, robotPosition, deadSpace);
-            [matrix, robotPosition, colorUnderRobot] = moveAlongPath(matrix, path, colorUnderRobot, batteryLife);
-            
+        if batteryLife<=0
+            deadSpace=robotPosition;
+            path=aStarPath(matrix, robotPosition, charger);
+            [matrix, robotPosition, ~]=moveAlongPath(matrix, path, robotPosition, colorUnderBot, batteryLife);
+            batteryLife=maxBatteryLife;
+            colorUnderBot=2;
+            path=aStarPath(matrix, robotPosition, deadSpace);
+            [matrix, robotPosition, colorUnderBot]=moveAlongPath(matrix, path, robotPosition, colorUnderBot, batteryLife);
+            [matrix, batteryLife]=clean(matrix, robotPosition, batteryLife);
         end
         if ismember(matrix(robotPosition(1)-1, robotPosition(2)), [3, 4]) %checks up for black
             newRobotPosition=[robotPosition(1)-1, robotPosition(2)];
-            [matrix, robotPosition, colorUnderRobot, batteryLife]=moveBot(matrix, robotPosition, newRobotPosition, colorUnderRobot, true, batteryLife);
+            [matrix, robotPosition, colorUnderBot, batteryLife]=moveBot(matrix, robotPosition, newRobotPosition, colorUnderBot, true, batteryLife);
         elseif ismember(matrix(robotPosition(1), robotPosition(2)+1), [3, 4]) %checks right for black
             newRobotPosition=[robotPosition(1), robotPosition(2)+1];
-            [matrix, robotPosition, colorUnderRobot, batteryLife]=moveBot(matrix, robotPosition, newRobotPosition, colorUnderRobot, true, batteryLife);
+            [matrix, robotPosition, colorUnderBot, batteryLife]=moveBot(matrix, robotPosition, newRobotPosition, colorUnderBot, true, batteryLife);
         elseif ismember(matrix(robotPosition(1)+1, robotPosition(2)), [3, 4]) %checks bottom for black
             newRobotPosition=[robotPosition(1)+1, robotPosition(2)];
-            [matrix, robotPosition, colorUnderRobot, batteryLife]=moveBot(matrix, robotPosition, newRobotPosition, colorUnderRobot, true, batteryLife);
+            [matrix, robotPosition, colorUnderBot, batteryLife]=moveBot(matrix, robotPosition, newRobotPosition, colorUnderBot, true, batteryLife);
         elseif ismember(matrix(robotPosition(1), robotPosition(2) -1), [3, 4]) %checks left for black
             newRobotPosition=[robotPosition(1), robotPosition(2)-1];
-            [matrix, robotPosition, colorUnderRobot, batteryLife]=moveBot(matrix, robotPosition, newRobotPosition, colorUnderRobot, true, batteryLife);
+            [matrix, robotPosition, colorUnderBot, batteryLife]=moveBot(matrix, robotPosition, newRobotPosition, colorUnderBot, true, batteryLife);
         else
-            [r, c]=find(matrix==4 | matrix==3); %looks for clean squares to go to if it gets stuck
-            path = aStarPath(matrix, robotPosition, [r(1), c(1)]);
-            [matrix, robotPosition, colorUnderRobot]=moveAlongPath(matrix, path, colorUnderRobot, 100);
-            % clear sound
-            % disp("Stuck!");
-            % [y, Fs]=audioread('sounds/badunk.mp3');
-            % badunk=audioplayer(y, Fs, 16);
-            % playblocking(badunk);
-            % break
+            [matrix, batteryLife, colorUnderBot]=clean(matrix, robotPosition, batteryLife);
+            [r, c]=find(matrix==4|matrix==3); %looks for clean squares to go to if it gets stuck
+            path=aStarPath(matrix, robotPosition, [r(1), c(1)]);
+            [matrix, robotPosition, ~]=moveAlongPath(matrix, path, robotPosition, colorUnderBot, batteryLife);
+            [matrix, batteryLife, colorUnderBot]=clean(matrix, robotPosition, batteryLife);
         end
     end
 
