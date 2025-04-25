@@ -3,7 +3,6 @@ function [matrix, batteryLife, colorUnderBot]=clean(matrix, robotPosition, batte
     if colorUnderBot ~= 2
         matrix(robotPosition(1), robotPosition(2))=5;
         batteryLife=batteryLife-1;
-        disp(batteryLife);
         colorUnderBot=5;
     end
 end
