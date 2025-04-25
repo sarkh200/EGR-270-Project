@@ -73,24 +73,24 @@ function availableNodes=getNeighborLocations(location, matrix)
 
     for i=1:8
         nC=c; nR=r;
-
+                
         switch i
             case 1
                 nC=c+1;
             case 2
-                nC=c+1; nR=r+1;
-            case 3
                 nR=r+1;
-            case 4
-                nC=c-1; nR=r+1;
-            case 5
+            case 3
                 nC=c-1;
-            case 6
-                nC=c-1; nR=r-1;
-            case 7
+            case 4
                 nR=r-1;
+            case 5
+                nC=c+1; nR=r+1;
+            case 6
+                nC=c-1; nR=r+1;
+            case 7
+                nC=c-1; nR=r-1;
             case 8
-                nC=c+1; nR=r-1;
+                nC=c+1; nR=r-1;                
         end
 
         if nR>0&&nR<rows&&nC>0&&nC<columns

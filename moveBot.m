@@ -1,4 +1,7 @@
-function [matrix, robotPosition, newColorUnderBot, batteryLife]=moveBot(matrix, robotPosition, newRobotPosition, colorUnderBot, doesClean, batteryLife)
+function [matrix, robotPosition, newColorUnderBot]=moveBot(matrix, robotPosition, newRobotPosition, colorUnderBot, doesClean)
+    global time;
+    global batteryLife;
+    
     newColorUnderBot=colorUnderBot;
 
     if robotPosition==newRobotPosition
@@ -13,7 +16,7 @@ function [matrix, robotPosition, newColorUnderBot, batteryLife]=moveBot(matrix, 
     if newRobotPosition(1)>0&&newRobotPosition(1)<=rows&&newRobotPosition(2)>0&&newRobotPosition(2)<=columns&&matrix(newRobotPosition(1), newRobotPosition(2))~=0
         % change the location under the robot back to what it was before robot went over it unless it's cleaning
         if doesClean&&(colorUnderBot==3||colorUnderBot==4)
-            [matrix, batteryLife]=clean(matrix, robotPosition, batteryLife);
+            [matrix]=clean(matrix, robotPosition);
         else
             matrix(robotPosition(1), robotPosition(2))=colorUnderBot;
         end
@@ -25,6 +28,7 @@ function [matrix, robotPosition, newColorUnderBot, batteryLife]=moveBot(matrix, 
         matrix(newRobotPosition(1), newRobotPosition(2))=1;
         % change the location of the robot to where is wants to go to
         robotPosition=newRobotPosition;
+        time = time+1;
     end
 
     drawFloorPlan(matrix);
