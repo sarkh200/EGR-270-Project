@@ -13,4 +13,5 @@ function drawFloorPlan(A)
     colormap(map) % Set the colormap to map
     axis('image') % resize the plot in the figure to the aspect ratio of the matrix
     axis off % turn off the axis labels
+    drawnow();
 end

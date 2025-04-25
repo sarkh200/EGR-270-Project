@@ -31,6 +31,6 @@ function [matrix, robotLocation, newColorUnderBot, batteryLife, valueOfGray]=mov
     end
 
     drawFloorPlan(matrix);
-    pause(.1);
+    % pause(.01);
 
 end

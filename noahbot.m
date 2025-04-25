@@ -23,12 +23,15 @@ function batteryLife=noahbot(matrix, batteryLife)
             newRobotPosition=[robotPosition(1), robotPosition(2)-1];
             [matrix, robotPosition, colorUnderRobot, batteryLife, valueOfGray]=moveBot(matrix, robotPosition, newRobotPosition, colorUnderRobot, batteryLife, true, valueOfGray);
         else
-            clear sound
-            disp("Stuck!");
-            [y, Fs]=audioread('sounds/badunk.mp3');
-            badunk=audioplayer(y, Fs, 16);
-            playblocking(badunk);
-            break
+            [r, c]=find(matrix==4);
+            path = aStarPath(matrix, robotPosition, [r(1), c(1)]);
+            [matrix, robotPosition, colorUnderRobot]=moveAlongPath(matrix, path, colorUnderRobot, 100);
+            % clear sound
+            % disp("Stuck!");
+            % [y, Fs]=audioread('sounds/badunk.mp3');
+            % badunk=audioplayer(y, Fs, 16);
+            % playblocking(badunk);
+            % break
         end
     end
 
