@@ -13,8 +13,8 @@ function [matrix, robotLocation, newColorUnderBot, batteryLife]=moveBot(matrix, 
     if newRobotLocation(1)>0&&newRobotLocation(1)<=rows&&newRobotLocation(2)>0&&newRobotLocation(2)<=columns&&matrix(newRobotLocation(1), newRobotLocation(2))~=0
         % change the location under the robot back to what it was before robot went over it unless it's cleaning
         if doesClean&&(colorUnderBot==3||colorUnderBot==4)
-            matrix(robotLocation(1), robotLocation(2))=5;
-            batteryLife=batteryLife-1;
+            matrix(robotLocation(1), robotLocation(2))=5; 
+            batteryLife=batteryLife-1; %depletes battery life when robot cleans
         else
             matrix(robotLocation(1), robotLocation(2))=colorUnderBot;
         end
