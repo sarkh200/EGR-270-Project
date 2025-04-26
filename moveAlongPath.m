@@ -1,6 +1,6 @@
-function [matrix, currentLocation, colorUnderBot]=moveAlongPath(matrix, path, currentLocation, colorUnderBot)
+function [matrix, currentPosition, colorUnderBot]=moveAlongPath(matrix, path, currentPosition, colorUnderBot)
     for i=1:size(path, 1)
-        [matrix, currentLocation, colorUnderBot]=moveBot(matrix, currentLocation, path(i, :), colorUnderBot, false);
+        [matrix, currentPosition, colorUnderBot]=moveBot(matrix, currentPosition, path(i, :), colorUnderBot, false);
     end
 
 end
