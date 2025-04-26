@@ -4,22 +4,22 @@
 % hCost = distance from the end node
 % fCost = gCost + hCost
 
-function path = aStarPath(startLocation, endLocation)
+function path = aStarPath(startPosition, endPosition)
 
 openNodeList = []
 closedNodeList = []
 
-startNode = dlnode(startLocation)
+startNode = dlnode(startPosition)
 
 add startNode to openNodeList
 
-% loops until exited by finding path to endLocation
+% loops until exited by finding path to endPosition
 while True
 	currentNode = node in openNodeList with the lowest fCost
 	remove currentNode from openNodeList
 	add currentNode to closedNodeList
 
-	if currentNode.Data == endLocation
+	if currentNode.Data == endPosition
 		break
 
 	foreach neighborNode of currentNode

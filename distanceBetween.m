@@ -1,3 +1,3 @@
-function distance=distanceBetween(startLocation, endLocation)
-    distance=max(abs(startLocation(1)-endLocation(1)), abs(startLocation(2)-endLocation(2)));
+function distance=distanceBetween(startPosition, endPosition)
+    distance=max(abs(startPosition(1)-endPosition(1)), abs(startPosition(2)-endPosition(2)));
 end
