@@ -1,4 +1,4 @@
-function scottbot(matrix, floorVars, maxBatteryLife)
+function [cleaned_squares] = scottbot(matrix, floorVars, maxBatteryLife)
     global batteryLife;
     if ismember(4, floorVars)
         [y, Fs]=audioread('sounds/epic_music.mp3');
@@ -45,4 +45,5 @@ function scottbot(matrix, floorVars, maxBatteryLife)
         end
     end
 
+    cleaned_squares = length(find(matrix >= 5));
 end
