@@ -1,0 +1,4 @@
+global matrix;
+
+[model, plan]=main_menu();
+[~, matrix] = main_menu[~, plan];
