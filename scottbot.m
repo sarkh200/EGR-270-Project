@@ -15,13 +15,13 @@ function scottbot(matrix, floorVars, maxBatteryLife)
     colorUnderBot=matrix(robotPosition(1), robotPosition(2));
     while ismember(floorVars(1), matrix)||ismember(floorVars(2), matrix)
         if batteryLife<=0
+            deadPosition=robotPosition;
             path=aStarPath(matrix, robotPosition, charger);
             [matrix, robotPosition, ~]=moveAlongPath(matrix, path, robotPosition, colorUnderBot);
             batteryLife=maxBatteryLife;
             colorUnderBot=2;
-            path=flip(path);
+            path=[flip(path); deadPosition];
             [matrix, robotPosition, colorUnderBot]=moveAlongPath(matrix, path, robotPosition, colorUnderBot);
-            [matrix]=clean(matrix, robotPosition);
         end
         if ismember(matrix(robotPosition(1)-1, robotPosition(2)), floorVars) %checks up for black
             newRobotPosition=[robotPosition(1)-1, robotPosition(2)];
@@ -37,8 +37,9 @@ function scottbot(matrix, floorVars, maxBatteryLife)
             [matrix, robotPosition, colorUnderBot]=moveBot(matrix, robotPosition, newRobotPosition, colorUnderBot, true);
         else
             [matrix, colorUnderBot]=clean(matrix, robotPosition);
-            [r, c]=find(matrix==floorVars(1)|matrix==floorVars(2)); %looks for clean squares to go to if it gets stuck
-            path=aStarPath(matrix, robotPosition, [r(1), c(1)]);
+            [r, c]=find(matrix==floorVars(1)|matrix==floorVars(2));
+            closestPosition=findClosestPosition(robotPosition, [r, c]); %looks for clean squares to go to if it gets stuck
+            path=aStarPath(matrix, robotPosition, closestPosition);
             [matrix, robotPosition, ~]=moveAlongPath(matrix, path, robotPosition, colorUnderBot);
             [matrix, colorUnderBot]=clean(matrix, robotPosition);
         end
