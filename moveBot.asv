@@ -1,5 +1,5 @@
 function [matrix, robotPosition, newColorUnderBot]=moveBot(matrix, robotPosition, newRobotPosition, colorUnderBot, doesClean)
-    global time;
+    global time batteryLife;
     
     newColorUnderBot=colorUnderBot;
 

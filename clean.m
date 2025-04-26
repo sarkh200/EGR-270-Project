@@ -1,6 +1,5 @@
 function [matrix, colorUnderBot]=clean(matrix, robotPosition)
-    global time;
-    global batteryLife;
+    global time batteryLife;
     
     colorUnderBot = matrix(robotPosition(1), robotPosition(2));
     if colorUnderBot ~= 2

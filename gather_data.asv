@@ -3,4 +3,6 @@ function [total_area, ratio_clean_to_dirty] = gather_data(matrix)
     dirty_squares = length(find(matrix==3));
     % clean_squares = length(find(matrix==4));
     ratio_clean_to_dirty = dirty_squares/(total_area-1)*100;
+    traveling
+    robot_time = (dirty_squares*5)+(total_area-dirty_squares);
 end

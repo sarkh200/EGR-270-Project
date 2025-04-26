@@ -21,9 +21,6 @@ switch model
         [total_area, ratio_clean_to_dirty, cleaned_squares]=scottbot(floorMap, [3, 3], batteryLife);
 end
 
-fprintf('0.2%f% of the floor was covered with dirt.', ratio_clean_to_dirty);
-fprintf('Floor plan surface area: %d square feet', total_area);
-fprintf('The robot took %d seconds to clean the house', time);
-fprintf('The robot had to recharge %d times.', rechargeAmount);
+fprintf('%0.2d% of the floor was covered with dirt')
 
 clear sound
