@@ -3,8 +3,8 @@ movementMap(25 30) = 0;
 
     FLOORPLAN DEFINITION:
         0 is black (can't move)
-        1 is red (current robot location)
-        2 is blue (charger and starting location)
+        1 is red (current robot Position)
+        2 is blue (charger and starting Position)
         3 is brown (dirty floor)
         4 is white (regular floor)
         5 is grey (cleaned floor)
@@ -19,7 +19,7 @@ noahbot:
     Robot
         while loop (iterates till either whole floor is cleaned or till bot runs low on battery)
             look up if position(i+1, ) == 0||5
-                if false move bot to new location
+                if false move bot to new Position
             look right if  position( , i+1) == 0||5
             look down if position( i-1, ) ==0||5
             look left if position( , i -1) ==0||5

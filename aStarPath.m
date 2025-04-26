@@ -73,10 +73,10 @@ function outPath=aStarPath(matrix, startPosition, endPosition)
     outPath=getPathFromMatrix(nodeMatrix, startPosition, endPosition);
 end
 
-function availableNodes=getNeighborPositions(location, matrix)
-    % getNeighborPositions gets all the surrounding nodes of location that aren't walls
+function availableNodes=getNeighborPositions(position, matrix)
+    % getNeighborPositions gets all the surrounding nodes of Position that aren't walls
     % Input arguments:
-    %   location = the location to get the surrounding nodes of (in the form of [row, column])
+    %   Position = the position to get the surrounding nodes of (in the form of [row, column])
     %   matrix = the matrix to use to find the surrounding nodes (in the form of a matrix)
     % Output arguments:
     %   availableNodes = a 2xN matrix that has a list of neighboring nodes (in the form of a 2xN matrix with column 1 being rows and column 2 being columns)
@@ -85,9 +85,9 @@ function availableNodes=getNeighborPositions(location, matrix)
     rows=size(matrix, 1);
     columns=size(matrix, 2);
 
-    % get the row and column location of "location"
-    locationRow=location(1);
-    locationCol=location(2);
+    % get the row and column position of "position"
+    PositionRow=position(1);
+    PositionCol=position(2);
 
     % initialize nodeCount and availableNodes
     nodeCount=0;
@@ -96,30 +96,30 @@ function availableNodes=getNeighborPositions(location, matrix)
     % loop through all possible 8 neighboring nodes
     for i=1:8
         % set the candidate row and columns
-        newRow=locationRow; newCol=locationCol;
+        newRow=PositionRow; newCol=PositionCol;
 
         switch i
             case 1 % check East
-                newCol=locationCol+1;
+                newCol=PositionCol+1;
             case 2 % check South
-                newRow=locationRow+1;
+                newRow=PositionRow+1;
             case 3 % check Left
-                newCol=locationCol-1;
+                newCol=PositionCol-1;
             case 4 % check North
-                newRow=locationRow-1;
+                newRow=PositionRow-1;
             case 5 % check Southeast
-                newCol=locationCol+1; newRow=locationRow+1;
+                newCol=PositionCol+1; newRow=PositionRow+1;
             case 6 % check Southwest
-                newCol=locationCol-1; newRow=locationRow+1;
+                newCol=PositionCol-1; newRow=PositionRow+1;
             case 7 % check Northwest
-                newCol=locationCol-1; newRow=locationRow-1;
+                newCol=PositionCol-1; newRow=PositionRow-1;
             case 8 % check NorthEast
-                newCol=locationCol+1; newRow=locationRow-1;
+                newCol=PositionCol+1; newRow=PositionRow-1;
         end
 
         % make sure the candidate row and column isn't out of the bounds of the matrix
         if newRow>0&&newRow<rows&&newCol>0&&newCol<columns
-            % add candidate location to available nodes if it isn't a wall
+            % add candidate position to available nodes if it isn't a wall
             if matrix(newRow, newCol)~=0
                 nodeCount=nodeCount+1;
                 availableNodes(nodeCount, :)=[newRow, newCol];
@@ -150,11 +150,11 @@ function index=findLowestFcost(nodeList, nodeMatrix)
 
     % run through entire list and compare the fCost to fCost at nodeList(index, :)
     for i=1:size(nodeList, 1)
-        % makes "iNodePositionArray" to allow referencing of its location within node matrix
+        % makes "iNodePositionArray" to allow referencing of its position within node matrix
         iNodePositionArray=num2cell(nodeList(i, :));
         % make iNode equal to the node at iNodePositionArray
         iNode=nodeMatrix(iNodePositionArray{:});
-        % makes "indexNodePositionArray" to allow referencing of its location within node matrix
+        % makes "indexNodePositionArray" to allow referencing of its position within node matrix
         indexNodePositionArray=num2cell(nodeList(index, :));
         % make indexNode equal to the node at indexNodePositionArray
         indexNode=nodeMatrix(indexNodePositionArray{:});
@@ -168,21 +168,21 @@ function index=findLowestFcost(nodeList, nodeMatrix)
 
 end
 
-function contains=doesNodeListContain(nodeList, location)
-    % doesNodeListContain checks to see if nodeList contains a location
+function contains=doesNodeListContain(nodeList, position)
+    % doesNodeListContain checks to see if nodeList contains a position
     % Inputs:
     %   nodeList = list of nodes to look at (in the form of a 2xN matrix with column 1 being rows and column 2 being columns)
-    %   location = the location you are checking (in the form of [row, column])
+    %   position = the position you are checking (in the form of [row, column])
     % Outputs:
-    %   contains = boolean that says if the nodeList contains location
+    %   contains = boolean that says if the nodeList contains position
 
     % initialize contains
     contains=false;
 
-    % check every row in nodeList to see if it is the same as location
+    % check every row in nodeList to see if it is the same as position
     for i=1:size(nodeList, 1)
 
-        if nodeList(i, :)==location
+        if nodeList(i, :)==position
             contains=true;
         end
 
@@ -192,29 +192,46 @@ end
 
 function outPath=getPathFromMatrix(nodeMatrix, startPosition, endPosition)
     % getPathFromMatrix retraces a path from the startPosition to the endPosition
-    endArray=num2cell(endPosition);
-    outPath(nodeMatrix(endArray{:}).gCost+1, :)=[0, 0];
+    % Inputs:
+    %   nodeMatrix = matrix of nodes that is referenced to retrace path
+    %   startPosition = position that the path starts at
+    %   endPosition = position that the path ends at
+    % Output:
+    %   outPath = a 2xN matrix that is a path from startPosition to endPosition (in the form of a 2xN matrix with column 1 being rows and column 2 being columns)
 
-    nodeMatrix.parentPosition;
+    % makes "endPositionArray" to allow referencing of its position within node matrix
+    endPositionArray=num2cell(endPosition);
 
+    % initialize outPath
+    outPath(nodeMatrix(endPositionArray{:}).gCost+1, :)=[0, 0];
+
+    % initialize currentPosition and index
     currentPosition=endPosition;
     index=1;
 
+    % run loop while currentPositon isn't equal to startPosition
     while ~all(currentPosition==startPosition)
-        currentArray=num2cell(currentPosition);
+        % makes "currentPositionArray" to allow referencing of its position within node matrix
+        currentPositionArray=num2cell(currentPosition);
+
+        % add currentPosition to outPath if it is a valid position
         if ~ismember(0, currentPosition)
             outPath(index, :)=currentPosition;
         end
-        currentPosition=nodeMatrix(currentArray{:}).parentPosition;
+        % change currentPositon to its parentPosition
+        currentPosition=nodeMatrix(currentPositionArray{:}).parentPosition;
         index=index+1;
     end
 
-    currentArray=num2cell(currentPosition);
-    currentPosition=nodeMatrix(currentArray{:}).parentPosition;
+    % makes "currentPositionArray" to allow referencing of its position within node matrix
+    currentPositionArray=num2cell(currentPosition);
+    currentPosition=nodeMatrix(currentPositionArray{:}).parentPosition;
     outPath(index, :)=currentPosition;
 
+    % flip outPath because it currently backwards
     outPath=flip(outPath, 1);
 
+    % get rid of any columns that are empty
     outPath=outPath(any(outPath, 2), any(outPath, 1));
 
 end

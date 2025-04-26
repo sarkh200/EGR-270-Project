@@ -11,7 +11,7 @@ Function moveBot(matrix, robotPosition, newRobotPosition, colorUnderBot, battery
     SET rows to number of rows in matrix
     SET columns to number of columns in matrix
 
-    %Check is new location is within bounds and not a wall (value of 0)
+    %Check is new Position is within bounds and not a wall (value of 0)
     IF newRobotPosition is within map bounds and matrix at newRobotPosition is not equal to 0 Then
 
         %If robot is cleaning and the current square is clean (3) or dirty (4)
@@ -26,10 +26,10 @@ Function moveBot(matrix, robotPosition, newRobotPosition, colorUnderBot, battery
         %Update the value under the robot
         SET newColorUnderbot to matrix at newRobotPosition
 
-        %Place robot at new location on matrix
+        %Place robot at new Position on matrix
         SET matrix at newRobotPosition to 1
 
-        %Update robot's current location
+        %Update robot's current Position
         SET robotPosition to newRobotPosition
 
     ENDIF
