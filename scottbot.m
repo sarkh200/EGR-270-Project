@@ -1,5 +1,5 @@
-function [cleaned_squares] = scottbot(matrix, floorVars, maxBatteryLife)
-    global batteryLife;
+function [total_area, ratio_clean_to_dirty, cleaned_squares] = scottbot(matrix, floorVars, maxBatteryLife)
+    global batteryLife rechargeAmount;
     if ismember(4, floorVars)
         [y, Fs]=audioread('sounds/epic_music.mp3');
     else
@@ -13,12 +13,14 @@ function [cleaned_squares] = scottbot(matrix, floorVars, maxBatteryLife)
     charger=[r, c];
     robotPosition=charger;
     colorUnderBot=matrix(robotPosition(1), robotPosition(2));
+    [total_area, ratio_clean_to_dirty]=gather_data(matrix);
     while ismember(floorVars(1), matrix)||ismember(floorVars(2), matrix)
         if batteryLife<=0
             deadPosition=robotPosition;
             path=aStarPath(matrix, robotPosition, charger);
             [matrix, robotPosition, ~]=moveAlongPath(matrix, path, robotPosition, colorUnderBot);
             batteryLife=maxBatteryLife;
+            rechargeAmount = rechargeAmount+1;
             colorUnderBot=2;
             path=[flip(path); deadPosition];
             [matrix, robotPosition, colorUnderBot]=moveAlongPath(matrix, path, robotPosition, colorUnderBot);

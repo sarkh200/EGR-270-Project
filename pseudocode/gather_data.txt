@@ -1,0 +1,6 @@
+FUNCTION [total_area, ratio_clean_to_dirty] = gather_data(matrix)
+    total_area = FIND every square NOT EQUAL TO 0;
+    dirty_squares = FIND every square EQUAL TO 3;
+    ratio_clean_to_dirty = dirty_squares DIVIDED by total_area - 1(charging station)*100;
+end
+
