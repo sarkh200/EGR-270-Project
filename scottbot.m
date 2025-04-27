@@ -1,11 +1,5 @@
-function [total_area, ratio_clean_to_dirty, cleaned_squares] = scottbot(matrix, floorVars, maxBatteryLife)
-    global batteryLife rechargeAmount;
-    if ismember(4, floorVars)
-        [y, Fs]=audioread('sounds/epic_music.mp3');
-    else
-        [y, Fs]=audioread('sounds/classical.mp3');
-    end
-    sound(y, Fs, 16);
+function [total_area, ratio_clean_to_dirty, cleaned_squares]=scottbot(matrix, floorVars, maxBatteryLife)
+    global batteryLife rechargeAmount time;
     batteryLife=maxBatteryLife;
     %Pulls the position of the charger based on the map matrix given
     [r, c]=find(matrix==2);
@@ -20,7 +14,10 @@ function [total_area, ratio_clean_to_dirty, cleaned_squares] = scottbot(matrix, 
             path=aStarPath(matrix, robotPosition, charger);
             [matrix, robotPosition, ~]=moveAlongPath(matrix, path, robotPosition, colorUnderBot);
             batteryLife=maxBatteryLife;
-            rechargeAmount = rechargeAmount+1;
+            [y, Fs]=audioread('sounds/recharge.mp3');
+            playblocking(audioplayer(y, Fs, 16));
+            time=time+60;
+            rechargeAmount=rechargeAmount+1;
             colorUnderBot=2;
             path=[flip(path); deadPosition];
             [matrix, robotPosition, colorUnderBot]=moveAlongPath(matrix, path, robotPosition, colorUnderBot);
@@ -47,5 +44,5 @@ function [total_area, ratio_clean_to_dirty, cleaned_squares] = scottbot(matrix, 
         end
     end
 
-    cleaned_squares = length(find(matrix >= 5));
+    cleaned_squares=length(find(matrix>=5));
 end
