@@ -7,7 +7,6 @@
         * back to charging station
             * A* maybe
 * Image processing (displaying animation of robot cleaning)
-    *
 
 
 

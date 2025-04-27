@@ -1,6 +1,6 @@
 function [matrix, robotPosition, newColorUnderBot]=moveBot(matrix, robotPosition, newRobotPosition, colorUnderBot, doesClean)
     global time;
-    
+
     newColorUnderBot=colorUnderBot;
 
     if robotPosition==newRobotPosition
@@ -27,6 +27,7 @@ function [matrix, robotPosition, newColorUnderBot]=moveBot(matrix, robotPosition
         matrix(newRobotPosition(1), newRobotPosition(2))=1;
         % change the Position of the robot to where is wants to go to
         robotPosition=newRobotPosition;
+        % increase time
         time=time+1;
     end
 
