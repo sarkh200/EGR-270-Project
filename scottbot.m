@@ -1,5 +1,5 @@
 function [total_area, ratio_clean_to_dirty, cleaned_squares]=scottbot(matrix, floorVars, maxBatteryLife)
-    global batteryLife rechargeAmount;
+    global batteryLife rechargeAmount time;
     batteryLife=maxBatteryLife;
     %Pulls the position of the charger based on the map matrix given
     [r, c]=find(matrix==2);
