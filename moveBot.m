@@ -1,12 +1,27 @@
 function [matrix, robotPosition, newColorUnderBot]=moveBot(matrix, robotPosition, newRobotPosition, colorUnderBot, doesClean)
+    % moveBot moves the robot to the position specified
+    % Inputs:
+    %   matrix = the floor map in the form of a matrix
+    %   robotPosition = the original position of the robot
+    %   newRobotPosition = the position the robot wants to go to
+    %   colorUnderBot = the color that is currently under the robot
+    %   doesClean = should the robot clean the square it's going to
+    % Outputs:
+    %   matrix = the updated matrix
+    %   robotPosition = the updated position of the robot
+    %   newColorUnderBot = the updated color under the robot
+
     global time;
 
+    %initializes newColorUnderBot
     newColorUnderBot=colorUnderBot;
 
+    %   skips if the robot is trying to move to where it currently is
     if robotPosition==newRobotPosition
         return;
     end
 
+    % get the dimensions of the matrix
     rows=size(matrix, 1);
     columns=size(matrix, 2);
 

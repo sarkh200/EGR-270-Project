@@ -1,8 +1,8 @@
 function drawFloorPlan(matrix)
-     % Input Arguments:
-     % 
-     % Output Arguments:
-     % None
+    % Input Arguments:
+    % matrix = the map of the floor in the form of a matrix
+    % Output Arguments:
+    % None
     matrix=matrix+1;
 
     map=[
