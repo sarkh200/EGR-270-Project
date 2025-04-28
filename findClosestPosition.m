@@ -1,4 +1,9 @@
 %Compares all of the possible paths to the goal position and finds the shortest path
+%Input arguments:
+% Current position
+% List of Positions
+%Output arguments:
+% closestpos = closest possible position from the list of all positions
 function closestPos=findClosestPosition(currentPosition, listOfPositions)
     lowestDistance=distanceBetween(currentPosition, listOfPositions(1, :));
     closestPos=listOfPositions(1, :);
