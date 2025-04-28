@@ -1,0 +1,18 @@
+Function findClosestPosition(currentPosition, listOfPositions):
+
+Compute the distance between currentPosition and the first position in listOfPositions
+Store this distance in lowestDistance
+Set closestPos to the first position in listOfPositions
+
+For each position from the second to the last in listOfPositions:
+Compute the distance between currentPosition and the current position
+
+If this distance is less than lowestDistance
+    Update lowestDistance to this new distance
+    Update closestPos to this current position
+
+End Loop
+
+Return closestPos as the position closest to currentPosition
+
+End Function
