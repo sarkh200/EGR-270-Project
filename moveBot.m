@@ -1,4 +1,14 @@
 function [matrix, robotPosition, newColorUnderBot]=moveBot(matrix, robotPosition, newRobotPosition, colorUnderBot, doesClean)
+    % Input Arguments:
+    % matrix = returns the floor plan
+    % 
+    % 
+    % 
+    % 
+    % Output Arguments:
+    % matrix = returns the floor plan
+    % robotPosition = the current position on the matrix of the roomba
+    % 
     global time;
 
     newColorUnderBot=colorUnderBot;
