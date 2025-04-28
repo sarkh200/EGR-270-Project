@@ -1,4 +1,12 @@
 function [total_area, ratio_clean_to_dirty, cleaned_squares]=scottbot(matrix, floorVars, maxBatteryLife)
+    % Input Arguments:
+    % matrix = the matrix used to find the nodes around it 
+    % floorVars = passes the values of the tiles on the floor, such as 1, 2, 3, 4
+    % maxBatteryLife = the total battery life that is passed into function (varies by roomba model)
+    % Output Arguments:
+    % total_area = the total area of the map excluding the walls
+    % ratio_clean_to_dirty = the percentage of the dirty floor compared to the clean floor
+    % cleaned_squares = the total amount of cleaned squares that the roomba has already gone over
     global batteryLife rechargeAmount time;
     batteryLife=maxBatteryLife;
     %Pulls the position of the charger based on the map matrix given
