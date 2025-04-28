@@ -1,5 +1,9 @@
-function drawFloorPlan(A)
-    A=A+1;
+function drawFloorPlan(matrix)
+     % Input Arguments:
+     % 
+     % Output Arguments:
+     % None
+    matrix=matrix+1;
 
     map=[
          0 0 0; %black, inaccessible
@@ -9,7 +13,7 @@ function drawFloorPlan(A)
          1 1 1; %white, clean floor
     %  .5 .5 .5; %display cleaned squares (optional)
          ];
-    image(A) % display the contents of matrix A
+    image(matrix) % display the contents of matrix A
     colormap(map) % Set the colormap to map
     axis('image') % resize the plot in the figure to the aspect ratio of the matrix
     axis off % turn off the axis labels
