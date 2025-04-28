@@ -1,0 +1,16 @@
+Function clean(matrix, robotPosition):
+
+Access global variables: time and batterylife
+
+Get the current square color under the robot:
+    colorUnderBot = value at (robotPosition row and column) in matrix
+
+If colorUnderBot is Not equal to 2:
+    Set the current square to 5 (mark it as cleaned)
+    Decrease batteryLife by 1
+    Set colorUnderBot to 5 (indicating the square is now clean)
+    Increase time by 5 units (every time the robot cleans a square)
+
+    Return updated matrix and colorUnderBot
+
+End Function

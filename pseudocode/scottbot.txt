@@ -1,0 +1,52 @@
+Function scottbot(matrix, floorVars, maxBatteryLife):
+
+Access global variables: batteryLife, rechargeAmount, time
+
+Set batteryLife = maxBatteryLife
+
+Find the charger's position
+Set robotPosition = charger position
+Get colorUnderBot = matrix value at robotPosition
+
+Calculate total_area and ratio_clean_to_dirty from gather_data(matrix)
+
+While there are still dirty squares in the matrix
+
+    If batteryLife is less than or equal to 0:
+        Save current robotPosition as deadPosition
+        Find path from current position to charger position using A*
+        Move robot along this path to reach the charger
+        Recharge - Set batteryLife to maxBatteryLife and Play recharge sound
+        Move robot along the same path to return back to the deadPosition
+
+    Check the four squares around the robot
+
+        If the square above is dirty
+            Move robot up one square
+            Update matrix, robotPosition, and colorUnderBot
+
+        Else if the square to the right is dirty
+            Move robot right one square
+            Update matrix, robotPosition, and colorUnderBot
+
+        Else if the square below is dirty
+            Move robot down one square
+            Update matrix, robotPosition, and colorUnderBot
+
+        Else if the square to the left is dirty
+            Move robot left one square
+            Update matrix, robotPosition, colorUnderBot
+
+        Else (meaning there is no dirty squares around the robot)
+            Clean the current square
+            Find all dirty squares remaining
+            Find the closest dirty square
+            Find the shortest path to the closes dirty square using A*
+            Move robot along the path to the dirty square
+            Clean the new square
+
+    After cleaning all squares
+        Count the number of cleaning squares by counting all of the matrix values greater than 5
+        Set cleaned_squares = number of clean squares
+
+End Function
