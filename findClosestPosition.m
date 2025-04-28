@@ -1,3 +1,4 @@
+%Compares all of the possible paths to the goal position and finds the shortest path
 function closestPos=findClosestPosition(currentPosition, listOfPositions)
     lowestDistance=distanceBetween(currentPosition, listOfPositions(1, :));
     closestPos=listOfPositions(1, :);
