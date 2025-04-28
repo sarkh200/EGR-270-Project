@@ -76,7 +76,7 @@ end
 function availableNodes=getNeighborPositions(position, matrix)
     % getNeighborPositions gets all the surrounding nodes of Position that aren't walls
     % Input arguments:
-    %   Position = the position to get the surrounding nodes of (in the form of [row, column])
+    %   position = the position to get the surrounding nodes of (in the form of [row, column])
     %   matrix = the matrix to use to find the surrounding nodes (in the form of a matrix)
     % Output arguments:
     %   availableNodes = a 2xN matrix that has a list of neighboring nodes (in the form of a 2xN matrix with column 1 being rows and column 2 being columns)

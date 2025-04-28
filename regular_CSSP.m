@@ -6,8 +6,8 @@ function [total_area, ratio_clean_to_dirty, cleaned_squares]=regular_CSSP(floorM
     % ratio_clean_to_dirty = the percentage of the dirty floor compared to the clean floor
     % cleaned_squares = the total amount of cleaned squares that the roomba has already gone over
     global batteryLife;
-    [y, Fs]=audioread('sounds/classical.mp3');
+    [y, Fs]=audioread('sounds/classical.mp3'); %Plays classical music
     sound(y, Fs, 16);
-    batteryLife=350;
-    [total_area, ratio_clean_to_dirty, cleaned_squares]=scottbot(floorMap, [3, 4], batteryLife);
+    batteryLife=350; %Sets battery life
+    [total_area, ratio_clean_to_dirty, cleaned_squares]=scottbot(floorMap, [3, 4], batteryLife); %Pulls floormap, total area, clean, and dirty squares
 end
