@@ -1,10 +1,12 @@
 classdef tilenode
+    % class that is used in aStarPath.m
     properties
-        parentPosition
-        gCost
-        hCost
+        parentPosition % position that the node originated from
+        gCost % distance from start position
+        hCost % distance to the end position
     end
     methods
+        % initialize the tile
         function n=tilenode (gCost, hCost, parentPosition)
             if nargin==0
                 parentPosition=[0, 0];
